@@ -3,6 +3,8 @@
 Ghost Net Fishing ist eine prototypische Webanwendung zum Melden, Anzeigen und Bergen von Geisternetzen.  
 Das Projekt wurde im Rahmen einer Fallstudie umgesetzt und verwendet den vorgegebenen Technologiestack mit Java, JSF, CDI-Beans, JPA, WildFly und MySQL.
 
+Repository: <https://github.com/Kassy-tech11/ghostnetfishing>
+
 ## Ziel der Anwendung
 
 Die Anwendung unterstützt einen einfachen Prozess zur Erfassung und Bergung von Geisternetzen:
@@ -60,56 +62,71 @@ Nicht umgesetzt wurden im ersten Prototyp:
 
 Diese Funktionen eignen sich für einen späteren Sprint.
 
-## Projektstruktur
+## Projektstamm und Projektstruktur
+
+Der Projektstamm im GitHub-Repository ist die oberste Ebene des Maven-Projekts. Dort liegen die zentralen Projektdateien `pom.xml`, `.gitignore` und `README.md`.  
+Der eigentliche Quellcode befindet sich unter dem Stamm `src/main`. Dieser Stamm ist für ein Maven-Webprojekt wichtig, weil dort Java-Code, Ressourcen und Webdateien getrennt abgelegt werden.
 
 ```text
-ghost-net-fishing/
+ghostnetfishing/
 ├── pom.xml
 ├── README.md
 ├── .gitignore
-├── src/
-│   └── main/
-│       ├── java/
-│       │   └── de/
-│       │       └── ghostnet/
-│       │           ├── model/
-│       │           │   ├── GhostNet.java
-│       │           │   ├── GhostNetStatus.java
-│       │           │   ├── Person.java
-│       │           │   ├── RecoveryRequest.java
-│       │           │   └── RecoveryRequestStatus.java
-│       │           ├── service/
-│       │           │   └── GhostNetService.java
-│       │           └── web/
-│       │               ├── AssignmentOverviewBean.java
-│       │               ├── ClaimGhostNetBean.java
-│       │               ├── OpenGhostNetsBean.java
-│       │               ├── RecoveryOverviewBean.java
-│       │               ├── RecoveryRequestOverviewBean.java
-│       │               ├── ReportGhostNetBean.java
-│       │               └── TakeoverRequestBean.java
-│       ├── resources/
-│       │   └── META-INF/
-│       │       └── persistence.xml
-│       └── webapp/
-│           ├── css/
-│           │   └── style.css
-│           ├── assignment-overview.xhtml
-│           ├── claim.xhtml
-│           ├── index.xhtml
-│           ├── open-nets.xhtml
-│           ├── recovery-overview.xhtml
-│           ├── recovery-requests.xhtml
-│           ├── report.xhtml
-│           ├── success.xhtml
-│           ├── takeover-request.xhtml
-│           └── WEB-INF/
-│               ├── beans.xml
-│               └── web.xml
-└── docs/
-    ├── diagrams/
-    └── screenshots/
+└── src/
+    └── main/
+        ├── java/
+        │   └── de/
+        │       └── ghostnet/
+        │           ├── model/
+        │           │   ├── GhostNet.java
+        │           │   ├── GhostNetStatus.java
+        │           │   ├── Person.java
+        │           │   ├── RecoveryRequest.java
+        │           │   └── RecoveryRequestStatus.java
+        │           ├── service/
+        │           │   └── GhostNetService.java
+        │           └── web/
+        │               ├── AssignmentOverviewBean.java
+        │               ├── ClaimGhostNetBean.java
+        │               ├── OpenGhostNetsBean.java
+        │               ├── RecoveryOverviewBean.java
+        │               ├── RecoveryRequestOverviewBean.java
+        │               ├── ReportGhostNetBean.java
+        │               └── TakeoverRequestBean.java
+        ├── resources/
+        │   └── META-INF/
+        │       └── persistence.xml
+        └── webapp/
+            ├── css/
+            │   └── style.css
+            ├── assignment-overview.xhtml
+            ├── claim.xhtml
+            ├── index.xhtml
+            ├── open-nets.xhtml
+            ├── recovery-overview.xhtml
+            ├── recovery-requests.xhtml
+            ├── report.xhtml
+            ├── success.xhtml
+            ├── takeover-request.xhtml
+            └── WEB-INF/
+                ├── beans.xml
+                └── web.xml
 ```
+
+### Bedeutung der wichtigsten Projektbereiche
+
+| Bereich | Zweck |
+|---|---|
+| `pom.xml` | Maven-Konfiguration für Build, Packaging und Abhängigkeiten |
+| `src/main/java` | Java-Quellcode der Anwendung |
+| `src/main/java/de/ghostnet/model` | JPA-Entities und Enums |
+| `src/main/java/de/ghostnet/service` | Fachlogik und Datenbankzugriffe über JPA |
+| `src/main/java/de/ghostnet/web` | CDI-Beans für die JSF-Seiten |
+| `src/main/resources/META-INF/persistence.xml` | JPA-Konfiguration und Verbindung zur WildFly-Datasource |
+| `src/main/webapp` | JSF/XHTML-Webseiten der Anwendung |
+| `src/main/webapp/css/style.css` | Zentrale CSS-Datei für die Gestaltung |
+| `src/main/webapp/WEB-INF/beans.xml` | Aktivierung von CDI |
+| `src/main/webapp/WEB-INF/web.xml` | Konfiguration des JSF Faces Servlet |
 
 ## Voraussetzungen
 
