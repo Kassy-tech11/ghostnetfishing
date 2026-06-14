@@ -1,0 +1,160 @@
+body {
+    font-family: Aparajita, Georgia, serif;
+    background-color: white;
+    margin: 28px;
+    font-size: 26px;
+    line-height: 1.45;
+}
+
+h1 {
+    font-family: Pristina, Aparajita, Georgia, serif;
+    font-size: 60px;
+    margin-bottom: 12px;
+}
+
+h2 {
+    font-family: Pristina, Aparajita, Georgia, serif;
+    font-size: 46px;
+    margin-top: 24px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-family: Pristina, Aparajita, Georgia, serif;
+    font-size: 38px;
+}
+
+p, li, small, label {
+    font-size: 26px;
+}
+
+small {
+    color: inherit;
+}
+
+hr {
+    border: none;
+    border-top: 2px solid #B7D7DF;
+    margin: 22px 0;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li {
+    margin-bottom: 22px;
+}
+
+table {
+    border-collapse: collapse;
+    margin-top: 16px;
+    background-color: white;
+    font-size: 24px;
+}
+
+th {
+    background-color: #ADF8FF;
+    color: black;
+    padding: 12px;
+    font-size: 24px;
+}
+
+td {
+    padding: 12px;
+    border: 1px solid #B7D7DF;
+    font-size: 24px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #99DDFF;
+    border-radius: 6px;
+    font-family: Aparajita, Georgia, serif;
+    font-size: 24px;
+    min-width: 260px;
+}
+
+/* Alle JSF-Buttons allgemein */
+input[type="button"],
+input[type="submit"],
+button {
+    min-width: 300px !important;
+    min-height: 56px !important;
+    padding: 12px 20px !important;
+    margin: 7px !important;
+    font-family: Aparajita, Georgia, serif !important;
+    font-size: 26px !important;
+    border-radius: 8px !important;
+    border: 1px solid #B7D7DF !important;
+    color: black !important;
+    cursor: pointer !important;
+}
+
+/* Navigationsbuttons */
+input.nav-button,
+button.nav-button,
+.nav-button,
+input[type="button"].nav-button,
+input[type="submit"].nav-button {
+    background-color: #99DDFF !important;
+}
+
+/* Aktionsbuttons */
+input.action-button,
+button.action-button,
+.action-button,
+input[type="button"].action-button,
+input[type="submit"].action-button {
+    background-color: #8EE1D7 !important;
+}
+
+/* Falls styleClass nicht greift: normale h:button auf der Startseite */
+input[type="button"] {
+    background-color: #99DDFF !important;
+}
+
+/* Submit-Buttons, also Aktionen */
+input[type="submit"] {
+    background-color: #8EE1D7 !important;
+}
+
+/* Hover für Navigation */
+input[type="button"]:hover,
+input.nav-button:hover,
+button.nav-button:hover,
+.nav-button:hover {
+    background-color: #5CC6FF !important;
+}
+
+/* Hover für Aktionen */
+input[type="submit"]:hover,
+input.action-button:hover,
+button.action-button:hover,
+.action-button:hover {
+    background-color: #7EDDD2 !important;
+}
+
+/* Deaktivierte Buttons */
+input[disabled],
+button[disabled],
+input.action-button[disabled],
+button.action-button[disabled] {
+    background-color: #B7D7DF !important;
+    color: #555 !important;
+    cursor: not-allowed !important;
+}
+
+.error-message {
+    color: red;
+    font-size: 24px;
+}
+
+.info-box {
+    background-color: #C2EAFF;
+    border-left: 6px solid #5CC6FF;
+    padding: 16px;
+    margin: 16px 0;
+    font-size: 24px;
+}

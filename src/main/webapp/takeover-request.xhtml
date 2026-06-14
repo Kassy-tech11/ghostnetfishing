@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+<f:metadata>
+    <f:viewParam name="id" value="#{takeoverRequestBean.ghostNetId}" />
+    <f:viewAction action="#{takeoverRequestBean.loadGhostNet}" onPostback="true" />
+</f:metadata>
+
+<h:head>
+    <title>Übernahme der Bergung anfragen</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+
+<h:body>
+
+    <h1>Übernahme der Bergung anfragen</h1>
+
+    <p>
+        Auf dieser Seite kann eine weitere Person anfragen, die Bergung eines bereits zugeordneten Geisternetzes zu übernehmen.
+    </p>
+
+	<p>
+		    <h:button outcome="index.xhtml" value="Startseite" styleClass="nav-button"/>
+		    |
+		    <h:button outcome="report.xhtml" value="Geisternetz melden" styleClass="nav-button"/>
+		    |
+		    <h:button outcome="open-nets.xhtml" value="Offene Geisternetze" styleClass="nav-button"/>
+		    |
+		    <h:button outcome="recovery-overview.xhtml" value="Bergungsübersicht" styleClass="nav-button"/>
+		    |
+		    <h:button outcome="assignment-overview.xhtml" value="Zuordnungsübersicht" styleClass="nav-button"/>
+		    |
+		    <h:button outcome="recovery-requests.xhtml" value="Übernahmeanfragen" styleClass="nav-button"/>
+		</p>
+
+    <hr />
+
+    <h:messages globalOnly="false" style="color:red;" />
+
+    <h:panelGroup rendered="#{empty takeoverRequestBean.ghostNet}">
+        <p>Das ausgewählte Geisternetz wurde nicht gefunden.</p>
+        <h:button outcome="recovery-overview.xhtml" value="Zurück zur Bergungsübersicht" styleClass="action-button" />
+    </h:panelGroup>
+
+    <h:panelGroup rendered="#{not empty takeoverRequestBean.ghostNet}">
+
+        <h2>Ausgewähltes Geisternetz</h2>
+
+        <p>
+            <strong>ID:</strong>
+            <h:outputText value="#{takeoverRequestBean.ghostNet.id}" />
+        </p>
+
+        <p>
+            <strong>Breitengrad:</strong>
+            <h:outputText value="#{takeoverRequestBean.ghostNet.latitude}" />
+        </p>
+
+        <p>
+            <strong>Längengrad:</strong>
+            <h:outputText value="#{takeoverRequestBean.ghostNet.longitude}" />
+        </p>
+
+        <p>
+            <strong>Größe in m²:</strong>
+            <h:outputText value="#{takeoverRequestBean.ghostNet.estimatedSizeM2}" />
+        </p>
+
+        <p>
+            <strong>Aktuelle bergende Person:</strong>
+            <h:outputText value="#{takeoverRequestBean.ghostNet.recoverer.name}" />
+        </p>
+
+        <h2>Daten der anfragenden Person</h2>
+
+        <h:form>
+
+            <h:inputHidden id="ghostNetId" value="#{takeoverRequestBean.ghostNetId}" />
+
+            <h:panelGrid columns="3" cellpadding="5">
+
+                <h:outputLabel for="requesterName" value="Name:" />
+                <h:inputText id="requesterName"
+                             value="#{takeoverRequestBean.requesterName}"
+                             required="true"
+                             requiredMessage="Der Name ist erforderlich."
+                             label="Name" />
+                <h:message for="requesterName" style="color:red;" />
+
+                <h:outputLabel for="phoneNumber" value="Telefonnummer:" />
+                <h:inputText id="phoneNumber"
+                             value="#{takeoverRequestBean.phoneNumber}"
+                             required="true"
+                             requiredMessage="Die Telefonnummer ist erforderlich."
+                             label="Telefonnummer" />
+                <h:message for="phoneNumber" style="color:red;" />
+
+            </h:panelGrid>
+
+            <br />
+
+            <h:commandButton value="Übernahme anfragen"
+                             action="#{takeoverRequestBean.submitRequest}"  styleClass="action-button"/>
+
+        </h:form>
+
+        <br />
+
+        <h:button outcome="recovery-overview.xhtml" value="Zurück zur Bergungsübersicht"  styleClass="action-button"/>
+
+    </h:panelGroup>
+
+</h:body>
+</html>

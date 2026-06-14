@@ -121,4 +121,7 @@ public class GhostNet {
     public boolean isClaimable() {
         return GhostNetStatus.REPORTED.equals(status) && recoverer == null;
     }
+    public boolean isTakeoverRequestable() {
+        return GhostNetStatus.RECOVERY_PENDING.equals(status) && recoverer != null;
+    }
 }

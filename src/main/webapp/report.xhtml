@@ -5,6 +5,7 @@
 
 <h:head>
     <title>Geisternetz melden</title>
+	<h:outputStylesheet library="css" name="style.css" />
 </h:head>
 
 <h:body>
@@ -15,70 +16,95 @@
         Auf dieser Seite kann ein gefundenes Geisternetz anonym erfasst werden.
     </p>
 
-	<nav>
-	    <h:link outcome="index.xhtml" value="Startseite" />
+	<p>
+	    <h:button outcome="index.xhtml" value="Startseite" styleClass="nav-button"/>
 	    |
-	    <h:link outcome="report.xhtml" value="Geisternetz melden" />
+	    <h:button outcome="report.xhtml" value="Geisternetz melden" styleClass="nav-button"/>
 	    |
-	    <h:link outcome="open-nets.xhtml" value="Offene Geisternetze" />
+	    <h:button outcome="open-nets.xhtml" value="Offene Geisternetze" styleClass="nav-button"/>
 	    |
-	    <h:link outcome="recovery-overview.xhtml" value="Bergungsübersicht" />
+	    <h:button outcome="recovery-overview.xhtml" value="Bergungsübersicht" styleClass="nav-button"/>
 	    |
-	    <h:link outcome="assignment-overview.xhtml" value="Zuordnungsübersicht" />
-	</nav>
+	    <h:button outcome="assignment-overview.xhtml" value="Zuordnungsübersicht" styleClass="nav-button"/>
+	    |
+	    <h:button outcome="recovery-requests.xhtml" value="Übernahmeanfragen" styleClass="nav-button"/>
+	</p>
 
 	<hr />
-    <h:form>
+	<h:form>
 
-        <h:messages globalOnly="true" style="color:red;" />
+	    <h:messages globalOnly="false" style="color:red;" />
 
-        <h:panelGrid columns="3" cellpadding="5">
+	    <h:panelGrid columns="3" cellpadding="5">
 
-            <h:outputLabel for="latitude" value="Breitengrad:" />
-			<h:inputText id="latitude"
-			             value="#{reportGhostNetBean.latitude}"
-			             label="Breitengrad"
-			             required="true"
-			             requiredMessage="Der Breitengrad ist erforderlich."
-						 validatorMessage="Der Breitengrad muss zwischen -90 und 90 liegen.">
-			    <f:validateDoubleRange minimum="-90" maximum="90" />
-			</h:inputText>
-            <h:message for="latitude" style="color:red;" />
+	        <h:outputLabel for="latitude" value="Breitengrad:" />
+	        <h:inputText id="latitude"
+	                     value="#{reportGhostNetBean.latitude}"
+	                     label="Breitengrad"
+	                     required="true"
+	                     requiredMessage="Der Breitengrad ist erforderlich."
+	                     validatorMessage="Der Breitengrad muss zwischen -90 und 90 liegen.">
+	            <f:validateDoubleRange minimum="-90" maximum="90" />
+	        </h:inputText>
+	        <h:message for="latitude" style="color:red;" />
 
-            <h:outputLabel for="longitude" value="Längengrad:" />
-			<h:inputText id="longitude"
-			             value="#{reportGhostNetBean.longitude}"
-			             label="Längengrad"
-			             required="true"
-			             requiredMessage="Der Längengrad ist erforderlich."
-						 validatorMessage="Der Längengrad muss zwischen -180 und 180 liegen.">
-			    <f:validateDoubleRange minimum="-180" maximum="180" />
-			</h:inputText>
-            <h:message for="longitude" style="color:red;" />
+	        <h:outputLabel for="longitude" value="Längengrad:" />
+	        <h:inputText id="longitude"
+	                     value="#{reportGhostNetBean.longitude}"
+	                     label="Längengrad"
+	                     required="true"
+	                     requiredMessage="Der Längengrad ist erforderlich."
+	                     validatorMessage="Der Längengrad muss zwischen -180 und 180 liegen.">
+	            <f:validateDoubleRange minimum="-180" maximum="180" />
+	        </h:inputText>
+	        <h:message for="longitude" style="color:red;" />
 
-            <h:outputLabel for="size" value="Geschätzte Größe in m²:" />
-			<h:inputText id="size"
-			             value="#{reportGhostNetBean.estimatedSizeM2}"
-			             label="Geschätzte Größe"
-			             required="true"
-			             requiredMessage="Die geschätzte Größe ist erforderlich."
-						 validatorMessage="Die geschätzte Größe muss größer als 0 sein.">
-			    <f:validateDoubleRange minimum="0.01" />
-			</h:inputText>
-            <h:message for="size" style="color:red;" />
+	        <h:outputLabel for="size" value="Geschätzte Größe in m²:" />
+	        <h:inputText id="size"
+	                     value="#{reportGhostNetBean.estimatedSizeM2}"
+	                     label="Geschätzte Größe"
+	                     required="true"
+	                     requiredMessage="Die geschätzte Größe ist erforderlich."
+	                     validatorMessage="Die geschätzte Größe muss größer als 0 sein.">
+	            <f:validateDoubleRange minimum="0.01" />
+	        </h:inputText>
+	        <h:message for="size" style="color:red;" />
 
-        </h:panelGrid>
+	    </h:panelGrid>
 
-        <br />
+	    <h2>Meldende Person</h2>
 
-        <h:commandButton value="Geisternetz anonym melden"
-                         action="#{reportGhostNetBean.save}" />
+	    <p>
+	        Die Meldung kann anonym erfolgen. Wenn Sie für Rückfragen erreichbar sein möchten,
+	        können Sie Name und Telefonnummer angeben.
+	    </p>
 
-    </h:form>
+	    <h:panelGrid columns="3" cellpadding="5">
+
+	        <h:outputLabel for="reporterName" value="Name der meldenden Person:" />
+	        <h:inputText id="reporterName"
+	                     value="#{reportGhostNetBean.reporterName}"
+	                     label="Name der meldenden Person" />
+	        <h:message for="reporterName" style="color:red;" />
+
+	        <h:outputLabel for="reporterPhone" value="Telefonnummer:" />
+	        <h:inputText id="reporterPhone"
+	                     value="#{reportGhostNetBean.reporterPhoneNumber}"
+	                     label="Telefonnummer der meldenden Person" />
+	        <h:message for="reporterPhone" style="color:red;" />
+
+	    </h:panelGrid>
+
+	    <br />
+
+	    <h:commandButton value="Geisternetz melden"
+	                     action="#{reportGhostNetBean.save}" />
+
+	</h:form>
 
     <br />
 
-    <h:link outcome="index.xhtml" value="Zurück zur Startseite" />
+    <h:button outcome="index.xhtml" value="Zurück zur Startseite"  styleClass="action-button"/>
 
 </h:body>
 </html>

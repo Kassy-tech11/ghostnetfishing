@@ -10,30 +10,33 @@
 
 <h:head>
     <title>Bergung übernehmen</title>
+	<h:outputStylesheet library="css" name="style.css" />
 </h:head>
 
 <h:body>
 
     <h1>Bergung eines Geisternetzes übernehmen</h1>
 
-	<nav>
-	    <h:link outcome="index.xhtml" value="Startseite" />
-	    |
-	    <h:link outcome="report.xhtml" value="Geisternetz melden" />
-	    |
-	    <h:link outcome="open-nets.xhtml" value="Offene Geisternetze" />
-	    |
-	    <h:link outcome="recovery-overview.xhtml" value="Bergungsübersicht" />
-	    |
-	    <h:link outcome="assignment-overview.xhtml" value="Zuordnungsübersicht" />
-	</nav>
+	<p>
+		    <h:button outcome="index.xhtml" value="Startseite" styleClass="nav-button"/>
+		    |
+		    <h:button outcome="report.xhtml" value="Geisternetz melden" styleClass="nav-button"/>
+		    |
+		    <h:button outcome="open-nets.xhtml" value="Offene Geisternetze" styleClass="nav-button"/>
+		    |
+		    <h:button outcome="recovery-overview.xhtml" value="Bergungsübersicht" styleClass="nav-button"/>
+		    |
+		    <h:button outcome="assignment-overview.xhtml" value="Zuordnungsübersicht" styleClass="nav-button"/>
+		    |
+		    <h:button outcome="recovery-requests.xhtml" value="Übernahmeanfragen" styleClass="nav-button"/>
+		</p>
 
 	<hr />
     <h:messages globalOnly="false" style="color:red;" />
 
     <h:panelGroup rendered="#{empty claimGhostNetBean.ghostNet}">
         <p>Das ausgewählte Geisternetz wurde nicht gefunden.</p>
-        <h:link outcome="open-nets.xhtml" value="Zurück zur Übersicht" />
+        <h:button outcome="open-nets.xhtml" value="Zurück zur Übersicht"  styleClass="action-button"/>
     </h:panelGroup>
 
     <h:panelGroup rendered="#{not empty claimGhostNetBean.ghostNet}">
@@ -98,7 +101,7 @@
 
         <br />
 
-        <h:link outcome="open-nets.xhtml" value="Zurück zur Übersicht" />
+        <h:button outcome="open-nets.xhtml" value="Zurück zur Übersicht"  styleClass="action-button"/>
 
     </h:panelGroup>
 

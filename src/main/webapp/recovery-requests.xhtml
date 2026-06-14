@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+<h:head>
+    <title>Übernahmeanfragen</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+
+<h:body>
+
+    <h1>Übernahmeanfragen</h1>
+
+    <p>
+        Diese Übersicht zeigt offene Anfragen zur Übernahme einer bereits geplanten Bergung.
+    </p>
+
+	<p>
+		    <h:button outcome="index.xhtml" value="Startseite" styleClass="nav-button"/>
+		    |
+		    <h:button outcome="report.xhtml" value="Geisternetz melden" styleClass="nav-button"/>
+		    |
+		    <h:button outcome="open-nets.xhtml" value="Offene Geisternetze" styleClass="nav-button"/>
+		    |
+		    <h:button outcome="recovery-overview.xhtml" value="Bergungsübersicht" styleClass="nav-button"/>
+		    |
+		    <h:button outcome="assignment-overview.xhtml" value="Zuordnungsübersicht" styleClass="nav-button"/>
+		    |
+		    <h:button outcome="recovery-requests.xhtml" value="Übernahmeanfragen" styleClass="nav-button"/>
+		</p>
+
+    <hr />
+
+    <h:messages globalOnly="false" style="color:red;" />
+
+    <h:panelGroup rendered="#{empty recoveryRequestOverviewBean.pendingRequests}">
+        <p>Aktuell liegen keine offenen Übernahmeanfragen vor.</p>
+    </h:panelGroup>
+
+    <h:form rendered="#{not empty recoveryRequestOverviewBean.pendingRequests}">
+
+	<h:dataTable value="#{recoveryRequestOverviewBean.pendingRequests}"
+	             var="recoveryRequest"
+	             border="1"
+	             cellpadding="6">
+
+            <h:column>
+                <f:facet name="header">Anfrage-ID</f:facet>
+                <h:outputText value="#{recoveryRequest.id}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Netz-ID</f:facet>
+                <h:outputText value="#{recoveryRequest.ghostNet.id}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Koordinaten</f:facet>
+                <h:outputText value="#{recoveryRequest.ghostNet.latitude}" />
+                <h:outputText value=", " />
+                <h:outputText value="#{recoveryRequest.ghostNet.longitude}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Aktuelle bergende Person</f:facet>
+                <h:outputText value="#{recoveryRequest.ghostNet.recoverer.name}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Anfragende Person</f:facet>
+                <h:outputText value="#{recoveryRequest.requester.name}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Telefonnummer</f:facet>
+                <h:outputText value="#{recoveryRequest.requester.phoneNumber}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Status</f:facet>
+                <h:outputText value="#{recoveryRequest.status.label}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Aktion</f:facet>
+
+                <h:commandButton value="Annehmen"
+                                 action="#{recoveryRequestOverviewBean.accept(recoveryRequest.id)}"  styleClass="action-button"/>
+
+                <h:outputText value=" " />
+
+                <h:commandButton value="Ablehnen"
+                                 action="#{recoveryRequestOverviewBean.reject(recoveryRequest.id)}"  styleClass="action-button"/>
+            </h:column>
+
+        </h:dataTable>
+
+    </h:form>
+
+    <br />
+	<h:column>
+	    <f:facet name="header">Aktion</f:facet>
+
+	    <br />
+
+	    <h:button outcome="takeover-request.xhtml"
+	            value="Übernahme anfragen"
+	            rendered="#{net.takeoverRequestable}" styleClass="action-button">
+	        <f:param name="id" value="#{net.id}" />
+	    </h:button>
+	</h:column>
+
+    <h:button outcome="index.xhtml" value="Zur Startseite" styleClass="action-button" />
+	<h:button outcome="takeover-request.xhtml"
+	        value="Übernahme anfragen"
+	        rendered="#{net.takeoverRequestable}" styleClass="action-button">
+	    <f:param name="id" value="#{net.id}"  styleClass="action-button"/>
+	</h:button>
+</h:body>
+</html>
