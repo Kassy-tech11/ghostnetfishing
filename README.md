@@ -1,4 +1,4 @@
-21:39 14.06.2026# Ghost Net Fishing
+# Ghost Net Fishing
 
 Ghost Net Fishing ist eine prototypische Webanwendung zum Melden, Anzeigen und Bergen von Geisternetzen.  
 Das Projekt wurde im Rahmen einer Fallstudie umgesetzt und verwendet den vorgegebenen Technologiestack mit Java, JSF, CDI-Beans, JPA, WildFly und MySQL.
