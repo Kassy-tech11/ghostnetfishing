@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+<h:head>
+    <title>Offene Geisternetze</title>
+</h:head>
+
+<h:body>
+
+    <h1>Offene Geisternetze</h1>
+
+    <p>
+        Diese Übersicht zeigt alle gemeldeten Geisternetze, die noch nicht geborgen oder verschollen sind.
+    </p>
+
+	<nav>
+	    <h:link outcome="index.xhtml" value="Startseite" />
+	    |
+	    <h:link outcome="report.xhtml" value="Geisternetz melden" />
+	    |
+	    <h:link outcome="open-nets.xhtml" value="Offene Geisternetze" />
+	    |
+	    <h:link outcome="recovery-overview.xhtml" value="Bergungsübersicht" />
+	    |
+	    <h:link outcome="assignment-overview.xhtml" value="Zuordnungsübersicht" />
+	</nav>
+
+	<hr />
+    <h:panelGroup rendered="#{empty openGhostNetsBean.openGhostNets}">
+        <p>Aktuell sind keine offenen Geisternetze vorhanden.</p>
+    </h:panelGroup>
+
+    <h:dataTable value="#{openGhostNetsBean.openGhostNets}"
+                 var="net"
+                 border="1"
+                 cellpadding="6"
+                 rendered="#{not empty openGhostNetsBean.openGhostNets}">
+
+        <h:column>
+            <f:facet name="header">ID</f:facet>
+            <h:outputText value="#{net.id}" />
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Breitengrad</f:facet>
+            <h:outputText value="#{net.latitude}" />
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Längengrad</f:facet>
+            <h:outputText value="#{net.longitude}" />
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Größe in m²</f:facet>
+            <h:outputText value="#{net.estimatedSizeM2}" />
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Status</f:facet>
+            <h:outputText value="#{net.status.label}" />
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Bergende Person</f:facet>
+            <h:outputText value="#{empty net.recoverer ? 'Noch nicht zugeordnet' : net.recoverer.name}" />
+        </h:column>
+		
+		<h:column>
+		    <f:facet name="header">Aktion</f:facet>
+
+		    <h:link outcome="claim.xhtml"
+		            value="Bergung übernehmen"
+		            rendered="#{net.claimable}">
+		        <f:param name="id" value="#{net.id}" />
+		    </h:link>
+
+		    <h:outputText value="Bereits zugeordnet"
+		                  rendered="#{not net.claimable}" />
+		</h:column>
+
+    </h:dataTable>
+
+    <br />
+
+    <h:link outcome="report.xhtml" value="Weiteres Geisternetz melden" />
+    <br />
+    <h:link outcome="index.xhtml" value="Zur Startseite" />
+
+</h:body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+	  <f:metadata>
+	      <f:viewParam name="id" value="#{claimGhostNetBean.ghostNetId}" />
+	      <f:viewAction action="#{claimGhostNetBean.loadGhostNet}" onPostback="true" />
+	  </f:metadata>
+
+<h:head>
+    <title>Bergung übernehmen</title>
+</h:head>
+
+<h:body>
+
+    <h1>Bergung eines Geisternetzes übernehmen</h1>
+
+	<nav>
+	    <h:link outcome="index.xhtml" value="Startseite" />
+	    |
+	    <h:link outcome="report.xhtml" value="Geisternetz melden" />
+	    |
+	    <h:link outcome="open-nets.xhtml" value="Offene Geisternetze" />
+	    |
+	    <h:link outcome="recovery-overview.xhtml" value="Bergungsübersicht" />
+	    |
+	    <h:link outcome="assignment-overview.xhtml" value="Zuordnungsübersicht" />
+	</nav>
+
+	<hr />
+    <h:messages globalOnly="false" style="color:red;" />
+
+    <h:panelGroup rendered="#{empty claimGhostNetBean.ghostNet}">
+        <p>Das ausgewählte Geisternetz wurde nicht gefunden.</p>
+        <h:link outcome="open-nets.xhtml" value="Zurück zur Übersicht" />
+    </h:panelGroup>
+
+    <h:panelGroup rendered="#{not empty claimGhostNetBean.ghostNet}">
+
+        <h2>Ausgewähltes Geisternetz</h2>
+
+        <p>
+            <strong>ID:</strong>
+            <h:outputText value="#{claimGhostNetBean.ghostNet.id}" />
+        </p>
+
+        <p>
+            <strong>Breitengrad:</strong>
+            <h:outputText value="#{claimGhostNetBean.ghostNet.latitude}" />
+        </p>
+
+        <p>
+            <strong>Längengrad:</strong>
+            <h:outputText value="#{claimGhostNetBean.ghostNet.longitude}" />
+        </p>
+
+        <p>
+            <strong>Größe in m²:</strong>
+            <h:outputText value="#{claimGhostNetBean.ghostNet.estimatedSizeM2}" />
+        </p>
+
+        <p>
+            <strong>Status:</strong>
+            <h:outputText value="#{claimGhostNetBean.ghostNet.status.label}" />
+        </p>
+
+        <h2>Daten der bergenden Person</h2>
+
+		<h:form>
+
+		    <h:inputHidden id="ghostNetId" value="#{claimGhostNetBean.ghostNetId}" />
+
+		    <h:panelGrid columns="3" cellpadding="5">
+
+                <h:outputLabel for="recovererName" value="Name:" />
+                <h:inputText id="recovererName"
+                             value="#{claimGhostNetBean.recovererName}"
+                             required="true"
+                             requiredMessage="Der Name ist erforderlich." />
+                <h:message for="recovererName" style="color:red;" />
+
+                <h:outputLabel for="phoneNumber" value="Telefonnummer:" />
+                <h:inputText id="phoneNumber"
+                             value="#{claimGhostNetBean.phoneNumber}"
+                             required="true"
+                             requiredMessage="Die Telefonnummer ist erforderlich." />
+                <h:message for="phoneNumber" style="color:red;" />
+
+            </h:panelGrid>
+
+            <br />
+
+            <h:commandButton value="Bergung übernehmen"
+                             action="#{claimGhostNetBean.claim}" />
+
+        </h:form>
+
+        <br />
+
+        <h:link outcome="open-nets.xhtml" value="Zurück zur Übersicht" />
+
+    </h:panelGroup>
+
+</h:body>
+</html>

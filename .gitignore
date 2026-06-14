@@ -1,0 +1,26 @@
+# Maven build output
+target/
+
+# Java compiled files
+*.class
+
+# Eclipse project files
+.classpath
+.project
+.settings/
+
+# IntelliJ / VS Code, falls vorhanden
+.idea/
+.vscode/
+*.iml
+
+# Logs
+*.log
+
+# Betriebssystem-Dateien
+.DS_Store
+Thumbs.db
+
+# Lokale Datenbank- oder temporäre Dateien
+*.sqlite
+*.db

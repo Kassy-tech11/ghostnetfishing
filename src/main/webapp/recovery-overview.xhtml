@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+<h:head>
+    <title>Bergungsübersicht</title>
+</h:head>
+
+<h:body>
+
+    <h1>Bergungsübersicht</h1>
+
+    <p>
+        Diese Übersicht zeigt alle Geisternetze, für die eine Bergung bevorsteht.
+    </p>
+
+	<nav>
+	    <h:link outcome="index.xhtml" value="Startseite" />
+	    |
+	    <h:link outcome="report.xhtml" value="Geisternetz melden" />
+	    |
+	    <h:link outcome="open-nets.xhtml" value="Offene Geisternetze" />
+	    |
+	    <h:link outcome="recovery-overview.xhtml" value="Bergungsübersicht" />
+	    |
+	    <h:link outcome="assignment-overview.xhtml" value="Zuordnungsübersicht" />
+	</nav>
+
+	<hr />
+    <h:messages globalOnly="false" style="color:red;" />
+
+    <h:panelGroup rendered="#{empty recoveryOverviewBean.pendingRecoveries}">
+        <p>Aktuell gibt es keine laufenden Bergungen.</p>
+    </h:panelGroup>
+
+    <h:form rendered="#{not empty recoveryOverviewBean.pendingRecoveries}">
+
+        <h:dataTable value="#{recoveryOverviewBean.pendingRecoveries}"
+                     var="net"
+                     border="1"
+                     cellpadding="6">
+
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                <h:outputText value="#{net.id}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Breitengrad</f:facet>
+                <h:outputText value="#{net.latitude}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Längengrad</f:facet>
+                <h:outputText value="#{net.longitude}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Größe in m²</f:facet>
+                <h:outputText value="#{net.estimatedSizeM2}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Status</f:facet>
+                <h:outputText value="#{net.status.label}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Bergende Person</f:facet>
+                <h:outputText value="#{net.recoverer.name}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Telefonnummer</f:facet>
+                <h:outputText value="#{net.recoverer.phoneNumber}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Aktion</f:facet>
+                <h:commandButton value="Als geborgen markieren"
+                                 action="#{recoveryOverviewBean.markAsRecovered(net.id)}" />
+            </h:column>
+
+        </h:dataTable>
+
+    </h:form>
+
+    <br />
+
+    <h:link outcome="open-nets.xhtml" value="Offene Geisternetze anzeigen" />
+    <br />
+    <h:link outcome="index.xhtml" value="Zur Startseite" />
+
+</h:body>
+</html>

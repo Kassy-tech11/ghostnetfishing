@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+<h:head>
+    <title>Geisternetz melden</title>
+</h:head>
+
+<h:body>
+
+    <h1>Geisternetz anonym melden</h1>
+
+    <p>
+        Auf dieser Seite kann ein gefundenes Geisternetz anonym erfasst werden.
+    </p>
+
+	<nav>
+	    <h:link outcome="index.xhtml" value="Startseite" />
+	    |
+	    <h:link outcome="report.xhtml" value="Geisternetz melden" />
+	    |
+	    <h:link outcome="open-nets.xhtml" value="Offene Geisternetze" />
+	    |
+	    <h:link outcome="recovery-overview.xhtml" value="Bergungsübersicht" />
+	    |
+	    <h:link outcome="assignment-overview.xhtml" value="Zuordnungsübersicht" />
+	</nav>
+
+	<hr />
+    <h:form>
+
+        <h:messages globalOnly="true" style="color:red;" />
+
+        <h:panelGrid columns="3" cellpadding="5">
+
+            <h:outputLabel for="latitude" value="Breitengrad:" />
+			<h:inputText id="latitude"
+			             value="#{reportGhostNetBean.latitude}"
+			             label="Breitengrad"
+			             required="true"
+			             requiredMessage="Der Breitengrad ist erforderlich."
+						 validatorMessage="Der Breitengrad muss zwischen -90 und 90 liegen.">
+			    <f:validateDoubleRange minimum="-90" maximum="90" />
+			</h:inputText>
+            <h:message for="latitude" style="color:red;" />
+
+            <h:outputLabel for="longitude" value="Längengrad:" />
+			<h:inputText id="longitude"
+			             value="#{reportGhostNetBean.longitude}"
+			             label="Längengrad"
+			             required="true"
+			             requiredMessage="Der Längengrad ist erforderlich."
+						 validatorMessage="Der Längengrad muss zwischen -180 und 180 liegen.">
+			    <f:validateDoubleRange minimum="-180" maximum="180" />
+			</h:inputText>
+            <h:message for="longitude" style="color:red;" />
+
+            <h:outputLabel for="size" value="Geschätzte Größe in m²:" />
+			<h:inputText id="size"
+			             value="#{reportGhostNetBean.estimatedSizeM2}"
+			             label="Geschätzte Größe"
+			             required="true"
+			             requiredMessage="Die geschätzte Größe ist erforderlich."
+						 validatorMessage="Die geschätzte Größe muss größer als 0 sein.">
+			    <f:validateDoubleRange minimum="0.01" />
+			</h:inputText>
+            <h:message for="size" style="color:red;" />
+
+        </h:panelGrid>
+
+        <br />
+
+        <h:commandButton value="Geisternetz anonym melden"
+                         action="#{reportGhostNetBean.save}" />
+
+    </h:form>
+
+    <br />
+
+    <h:link outcome="index.xhtml" value="Zurück zur Startseite" />
+
+</h:body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html">
+
+<h:head>
+    <title>Ghost Net Fishing</title>
+</h:head>
+
+<h:body>
+    <h1>Ghost Net Fishing</h1>
+
+	<nav>
+	    <h:link outcome="index.xhtml" value="Startseite" />
+	    |
+	    <h:link outcome="report.xhtml" value="Geisternetz melden" />
+	    |
+	    <h:link outcome="open-nets.xhtml" value="Offene Geisternetze" />
+	    |
+	    <h:link outcome="recovery-overview.xhtml" value="Bergungsübersicht" />
+	    |
+	    <h:link outcome="assignment-overview.xhtml" value="Zuordnungsübersicht" />
+	</nav>
+
+	<hr />
+
+    <p>
+        Webanwendung zum Melden und Bergen von Geisternetzen.
+    </p>
+
+    <p>
+        <strong>
+            <h:outputText value="#{helloBean.message}" />
+        </strong>
+    </p>
+	<p>
+	    <h:link outcome="report.xhtml" value="Geisternetz melden" />
+	</p>
+	<p>
+	    <h:link outcome="open-nets.xhtml" value="Offene Geisternetze anzeigen" />
+	</p>
+	<p>
+	    <h:link outcome="recovery-overview.xhtml" value="Bergungsübersicht anzeigen" />
+	</p>
+	<p>
+	    <h:link outcome="assignment-overview.xhtml" value="Zuordnungsübersicht anzeigen" />
+	</p>
+</h:body>
+
+</html>
